@@ -7,7 +7,7 @@ access: http://localhost:3025/swagger-ui.html
 
 
 example POST
-
+'''
 curl -X 'POST' \
   'http://localhost:3025/api/v2/events/create' \
   -H 'accept: */*' \
@@ -18,6 +18,6 @@ curl -X 'POST' \
   "event": "YELLOW_IN_PROGRESS",
   "recordDate": "2023-02-28T11:01:09.166Z"
 }'
-
+'''
 
 ab -n 1000 -c 100 http://localhost:3025/api/v2/events/generate
