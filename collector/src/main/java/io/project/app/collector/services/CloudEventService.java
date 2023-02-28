@@ -27,7 +27,7 @@ public class CloudEventService {
     }
 
     public void saveEvent(CloudEvent cloudEvent) {
-        cloudEvent.setId(System.currentTimeMillis());
+       /// cloudEvent.setId(System.currentTimeMillis());
         cloudEventRepository.save(cloudEvent);
     }
 

@@ -6,7 +6,9 @@ package io.project.app.collector.resources;
 
 import io.project.app.collector.domain.CloudEvent;
 import io.project.app.collector.services.CloudEventService;
+import io.project.app.collector.services.Direction;
 import java.util.List;
+import java.util.Random;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,18 @@ public class EventController {
     public ResponseEntity find() {
         List<CloudEvent> allList = cloudEventService.getAllList();
         return ResponseEntity.status(HttpStatus.OK).body(allList);
+
+    }
+    
+    @GetMapping(path="/generate")
+    public ResponseEntity generateMillion() {
+        CloudEvent cloudEvent = new CloudEvent();
+        int nextInt = new Random().nextInt(Direction.values().length);
+        cloudEvent.setEventType(Direction.values()[nextInt].name());
+        cloudEvent.setEvent("Event log generated");
+        cloudEventService.saveEvent(cloudEvent);
+      
+        return ResponseEntity.status(HttpStatus.OK).body("Done");
 
     }
 

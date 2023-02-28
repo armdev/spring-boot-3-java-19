@@ -3,6 +3,8 @@ package io.project.app.collector.domain;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.io.Serializable;
@@ -20,7 +22,8 @@ public class CloudEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id   
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;  
