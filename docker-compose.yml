@@ -1,0 +1,48 @@
+version: '3'
+services:
+  
+  postgresnode:
+    image: postgresnode    
+    build: ./postgresnode
+    container_name: postgresnode
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=eventDB
+      - POSTGRES_PASSWORD=dirtyLogs2025
+      - POSTGRES_USER=postgres
+    networks:
+      - pnet
+    volumes:
+      - ~/volumes/pgevent/data/pgevent/logs/:/opt/postgres/logs
+      - ~/volumes/pgevent/data:/var/lib/postgresql/data
+      - ./postgresnode/postgresql.conf:/etc/postgresql/postgresql.conf:rw   
+    sysctls:
+      - kernel.shmmax=100663296
+
+  collector:
+    image: collector
+    build: ./collector
+    container_name: collector
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    links:
+      - postgresnode         
+    depends_on:
+      - postgresnode          
+    ports:
+      - '3025:3025'   
+    networks:
+      - pnet
+      
+  
+networks:
+  pnet:
+    driver: bridge   
+    ipam:
+      driver: default

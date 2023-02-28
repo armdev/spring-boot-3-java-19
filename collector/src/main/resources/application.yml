@@ -1,0 +1,58 @@
+management:
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+  endpoints:
+    jmx:
+      exposure:
+       include: '*'
+    web:
+     exposure:
+      include: '*'
+      base-path: /actuator
+    cors:
+      allowed-origins: 'true'
+      enabled-by-default: 'false'
+
+      
+server:
+   port: 3025
+    
+spring:    
+  application:
+    name: collector
+    
+  datasource: 
+    url:  jdbc:postgresql://postgresnode:5432/eventDB
+    username: postgres
+    password: dirtyLogs2025  
+    platform: POSTGRESQL
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: false
+    database: POSTGRESQL 
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+    properties: 
+      hibernate:
+       connection:
+        provider_disables_autocommit: false
+       temp:
+        use_jdbc_metadata_defaults: false 
+
+
+logging:
+    level:
+      root: INFO
+      io.project.app.collector: INFO
+      
+#springdoc:
+#   api-docs:
+#       path: /api-docs
+#   swagger-ui:
+#       path: /swagger-ui.html  
