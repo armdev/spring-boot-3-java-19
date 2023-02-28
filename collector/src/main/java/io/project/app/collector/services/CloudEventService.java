@@ -6,6 +6,7 @@ package io.project.app.collector.services;
 
 import io.project.app.collector.domain.CloudEvent;
 import io.project.app.collector.repositories.CloudEventRepository;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,21 @@ public class CloudEventService {
     }
 
     public void saveEvent(CloudEvent cloudEvent) {
-       /// cloudEvent.setId(System.currentTimeMillis());
+        cloudEvent.setRecordDate(LocalDateTime.now());
+        /// cloudEvent.setId(System.currentTimeMillis());
         cloudEventRepository.save(cloudEvent);
     }
 
     public List<CloudEvent> getAllList() {
         return cloudEventRepository.findAll();
+    }
+
+    public long getCount() {
+        return cloudEventRepository.count();
+    }
+
+    public void deleteAll() {
+        cloudEventRepository.deleteAll();
     }
 
 }
