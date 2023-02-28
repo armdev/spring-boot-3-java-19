@@ -30,6 +30,4 @@ curl -X 'GET' \
 
 
 ab -n 1000 -c 100 http://localhost:3025/api/v2/events/generate
-
-ab -n 1000 -c 100 http://localhost:3025/api/v2/events/generate
 ```
