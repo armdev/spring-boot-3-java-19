@@ -14,12 +14,12 @@ services:
     networks:
       - pnet
     volumes:
-      - ~/volumes/pgevent/data/pgevent/logs/:/opt/postgres/logs
-      - ~/volumes/pgevent/data:/var/lib/postgresql/data
-      - ./postgresnode/postgresql.conf:/etc/postgresql/postgresql.conf:rw   
+      - ~/volumes/data/pg/logs/:/opt/postgres/logs
+      - ~/volumes/data/pg/data:/var/lib/postgresql/data
+      - ./postgresnode/postgresql.conf:/etc/postgresql/postgresql.conf:rw  
     sysctls:
       - kernel.shmmax=100663296
-
+#
   collector:
     image: collector
     build: ./collector
