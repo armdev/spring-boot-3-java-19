@@ -8,7 +8,7 @@ access: http://localhost:3025/swagger-ui.html
 
 
 ```shell
->>>>>>> 82f5d5fff813faed14d3138f8c5cd62750292fd3
+
 curl -X 'POST' \
   'http://localhost:3025/api/v2/events/create' \
   -H 'accept: */*' \
